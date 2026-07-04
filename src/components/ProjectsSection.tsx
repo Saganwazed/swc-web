@@ -1,108 +1,163 @@
 import React from 'react';
-import { Dumbbell, Brain, ExternalLink, Github, Clock } from 'lucide-react';
+import { Github, Folder, Wrench } from 'lucide-react';
+import Reveal from './Reveal';
+
+interface Project {
+  title: string;
+  tagline: string;
+  description: string;
+  tech: string[];
+  github: string;
+  featured?: boolean;
+}
+
+const projects: Project[] = [
+  {
+    title: 'Alaka',
+    tagline: 'Local-first AI chat for the desktop',
+    description:
+      'A desktop app for completely private AI conversations — no data ever leaves your machine. Bundles Ollama for offline inference, with multi-session chat, streaming responses, an in-app model manager, parameter tuning, and deep UI customization. Ships with a model ready to use on first launch.',
+    tech: ['Electron', 'React', 'TypeScript', 'Ollama', 'Tailwind CSS'],
+    github: 'https://github.com/Saganwazed/Alaka',
+    featured: true,
+  },
+  {
+    title: 'Candor Research',
+    tagline: 'Full-stack research platform',
+    description:
+      'A Next.js web application with a Supabase backend and a companion browser extension, instrumented with product analytics and error monitoring for production use.',
+    tech: ['Next.js', 'TypeScript', 'Supabase', 'PostHog', 'Sentry'],
+    github: 'https://github.com/Saganwazed/Candor-Research',
+  },
+  {
+    title: 'Edexcel Past-Paper Scraper',
+    tagline: 'Study resources, automated',
+    description:
+      'A Python scraper that collects Edexcel A-Level Maths past papers and their solutions from across the web into one organized archive — built to make exam prep faster.',
+    tech: ['Python', 'Web Scraping'],
+    github: 'https://github.com/Saganwazed/Python-Scraper-for-Edexcel-A-Level-Maths-',
+  },
+];
+
+const inProgress = [
+  {
+    name: 'AI Fitness Coach',
+    note: 'A free app for personalized, AI-guided training.',
+  },
+  {
+    name: 'AI-Guided Mindfulness',
+    note: 'A free app for guided mindfulness and stress reduction.',
+  },
+];
 
 const ProjectsSection = () => {
-  const projects = [
-    {
-      id: 1,
-      title: "AI Fitness App",
-      icon: <Dumbbell size={32} className="text-green-400" />,
-      concept: "A state-of-the-art, completely free AI-powered fitness application designed to revolutionize personal training and health management.",
-      innovation: "Built to be light years ahead of existing alternatives, focusing on intelligent user guidance and personalized experiences.",
-      impact: "Empowering users with accessible, high-quality fitness insights and personalized training.",
-      status: "Coming Soon",
-      gradient: "from-green-400/20 to-blue-500/20"
-    },
-    {
-      id: 2,
-      title: "AI-Guided Mindfulness App",
-      icon: <Brain size={32} className="text-purple-400" />,
-      concept: "A revolutionary, completely free AI-driven mindfulness application aimed at enhancing mental well-being and stress reduction.",
-      innovation: "Designed to surpass current offerings by providing intelligent, personalized guidance for mindfulness practices.",
-      impact: "Making advanced mindfulness techniques accessible and effective for everyone.",
-      status: "Coming Soon",
-      gradient: "from-purple-400/20 to-pink-500/20"
-    }
-  ];
+  const featured = projects.find((p) => p.featured)!;
+  const rest = projects.filter((p) => !p.featured);
 
   return (
-    <section id="projects" className="py-20 relative">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl sm:text-5xl font-bold mb-6">
-            Featured <span className="gradient-text">Projects</span>
+    <section id="projects" className="py-24">
+      <div className="max-w-content mx-auto px-6 lg:px-8">
+        <Reveal>
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-10">
+            Projects
           </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            These are active projects I'm passionately developing, aiming to launch soon and redefine their respective digital spaces.
-          </p>
-        </div>
+        </Reveal>
 
-        <div className="grid md:grid-cols-2 gap-8">
-          {projects.map((project, index) => (
-            <div key={project.id} className={`glass-card rounded-2xl p-8 relative overflow-hidden fade-in stagger-${index + 1}`}>
-              {/* Background Gradient */}
-              <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-30 rounded-2xl`}></div>
-              
-              <div className="relative z-10">
-                {/* Header */}
-                <div className="flex items-center justify-between mb-6">
-                  <div className="flex items-center space-x-4">
-                    <div className="glass rounded-full p-3">
-                      {project.icon}
-                    </div>
-                    <div>
-                      <h3 className="text-2xl font-bold">{project.title}</h3>
-                      <div className="flex items-center space-x-2 mt-1">
-                        <Clock size={16} className="text-yellow-400" />
-                        <span className="text-sm text-yellow-400 font-medium">{project.status}</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Content */}
-                <div className="space-y-4">
-                  <div>
-                    <h4 className="font-semibold text-lg mb-2 text-blue-300">Concept</h4>
-                    <p className="text-gray-300 leading-relaxed">{project.concept}</p>
-                  </div>
-
-                  <div>
-                    <h4 className="font-semibold text-lg mb-2 text-purple-300">Innovation</h4>
-                    <p className="text-gray-300 leading-relaxed">{project.innovation}</p>
-                  </div>
-
-                  <div>
-                    <h4 className="font-semibold text-lg mb-2 text-green-300">Impact</h4>
-                    <p className="text-gray-300 leading-relaxed">{project.impact}</p>
-                  </div>
-                </div>
-
-                {/* Footer */}
-                <div className="flex items-center justify-between mt-8 pt-6 border-t border-white/10">
-                  <div className="flex space-x-3">
-                    <button className="glass rounded-full p-2 hover:bg-white/10 transition-all duration-300">
-                      <ExternalLink size={18} className="text-gray-300" />
-                    </button>
-                    <button className="glass rounded-full p-2 hover:bg-white/10 transition-all duration-300">
-                      <Github size={18} className="text-gray-300" />
-                    </button>
-                  </div>
-                  <span className="text-sm text-gray-400">Launching Soon</span>
-                </div>
-              </div>
+        {/* Featured project */}
+        <Reveal>
+          <a
+            href={featured.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group block rounded-2xl border border-white/10 bg-white/[0.03] p-8 lg:p-10 mb-8 hover:border-accent/40 transition-colors"
+          >
+            <div className="flex items-center justify-between mb-6">
+              <span className="text-sm font-medium text-accent">
+                Featured project
+              </span>
+              <Github
+                size={20}
+                className="text-zinc-500 group-hover:text-white transition-colors"
+              />
             </div>
+            <h3 className="text-2xl font-bold text-white mb-1">
+              {featured.title}
+            </h3>
+            <p className="text-zinc-500 mb-4">{featured.tagline}</p>
+            <p className="text-zinc-400 leading-relaxed max-w-3xl mb-6">
+              {featured.description}
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {featured.tech.map((t) => (
+                <span
+                  key={t}
+                  className="text-xs font-medium text-zinc-300 bg-white/5 border border-white/10 rounded-full px-3 py-1"
+                >
+                  {t}
+                </span>
+              ))}
+            </div>
+          </a>
+        </Reveal>
+
+        {/* Other projects */}
+        <div className="grid md:grid-cols-2 gap-6">
+          {rest.map((project, i) => (
+            <Reveal key={project.title} delay={i * 100}>
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex flex-col h-full rounded-2xl border border-white/10 bg-white/[0.03] p-7 hover:border-accent/40 transition-colors"
+              >
+                <div className="flex items-center justify-between mb-5">
+                  <Folder size={22} className="text-accent" />
+                  <Github
+                    size={18}
+                    className="text-zinc-500 group-hover:text-white transition-colors"
+                  />
+                </div>
+                <h3 className="text-lg font-bold text-white mb-1">
+                  {project.title}
+                </h3>
+                <p className="text-sm text-zinc-500 mb-3">{project.tagline}</p>
+                <p className="text-sm text-zinc-400 leading-relaxed mb-5 flex-grow">
+                  {project.description}
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {project.tech.map((t) => (
+                    <span
+                      key={t}
+                      className="text-xs font-medium text-zinc-300 bg-white/5 border border-white/10 rounded-full px-3 py-1"
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </a>
+            </Reveal>
           ))}
         </div>
 
-        <div className="text-center mt-12">
-          <p className="text-lg text-gray-300 mb-6">
-            Both applications will be <span className="gradient-text font-semibold">completely free</span> and designed to revolutionize their respective categories.
-          </p>
-          <div className="glass-card rounded-full px-8 py-3 inline-block">
-            <span className="text-sm font-medium">🚀 Stay tuned for launch announcements!</span>
+        {/* Currently building */}
+        <Reveal>
+          <div className="mt-8 rounded-2xl border border-white/10 bg-white/[0.02] p-7">
+            <div className="flex items-center gap-3 mb-4">
+              <Wrench size={18} className="text-zinc-500" />
+              <h3 className="text-sm font-semibold text-zinc-300 uppercase tracking-wider">
+                Currently building
+              </h3>
+            </div>
+            <div className="grid sm:grid-cols-2 gap-4">
+              {inProgress.map((item) => (
+                <div key={item.name}>
+                  <p className="font-medium text-white">{item.name}</p>
+                  <p className="text-sm text-zinc-500">{item.note}</p>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

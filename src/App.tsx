@@ -1,4 +1,5 @@
 import React from 'react';
+import Navigation from './components/Navigation';
 import HeroSection from './components/HeroSection';
 import AboutSection from './components/AboutSection';
 import ProjectsSection from './components/ProjectsSection';
@@ -9,12 +10,15 @@ import ContactSection from './components/ContactSection';
 function App() {
   return (
     <div className="min-h-screen">
-      <HeroSection />
-      <AboutSection />
-      <ProjectsSection />
-      <SkillsSection />
-      <EducationSection />
-      <ContactSection />
+      <Navigation />
+      <main>
+        <HeroSection />
+        <AboutSection />
+        <ProjectsSection />
+        <SkillsSection />
+        <EducationSection />
+        <ContactSection />
+      </main>
     </div>
   );
 }

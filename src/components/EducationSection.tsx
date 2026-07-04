@@ -1,75 +1,49 @@
 import React from 'react';
-import { GraduationCap, Calendar, MapPin, BookOpen } from 'lucide-react';
+import { GraduationCap } from 'lucide-react';
+import Reveal from './Reveal';
 
 const EducationSection = () => {
   return (
-    <section id="education" className="py-20 relative">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl sm:text-5xl font-bold mb-6">
-            <span className="gradient-text">Education</span>
+    <section id="education" className="py-24">
+      <div className="max-w-content mx-auto px-6 lg:px-8">
+        <Reveal>
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-10">
+            Education
           </h2>
-        </div>
+        </Reveal>
 
-        <div className="max-w-4xl mx-auto">
-          <div className="glass-card rounded-2xl p-8 lg:p-12 relative overflow-hidden">
-            {/* Background Gradient */}
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-600/10 rounded-2xl"></div>
-            
-            <div className="relative z-10">
-              <div className="flex items-center mb-8">
-                <div className="glass rounded-full p-4 mr-6">
-                  <GraduationCap size={40} className="text-blue-400" />
-                </div>
-                <div>
-                  <h3 className="text-3xl font-bold">California State University</h3>
-                  <p className="text-xl text-blue-300 font-semibold">Bachelor of Computer Science</p>
-                </div>
+        <Reveal>
+          <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-8 lg:p-10 max-w-3xl">
+            <div className="flex items-start gap-5">
+              <div className="rounded-xl bg-white/5 border border-white/10 p-3 shrink-0">
+                <GraduationCap size={26} className="text-accent" />
               </div>
-
-              <div className="grid md:grid-cols-2 gap-8">
-                <div className="space-y-6">
-                  <div className="flex items-center space-x-3">
-                    <Calendar size={20} className="text-green-400" />
-                    <div>
-                      <p className="text-sm text-gray-400">Expected Graduation</p>
-                      <p className="text-lg font-semibold">May 2027</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center space-x-3">
-                    <MapPin size={20} className="text-purple-400" />
-                    <div>
-                      <p className="text-sm text-gray-400">Current Status</p>
-                      <p className="text-lg font-semibold">Junior Year Student</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="space-y-6">
-                  <div className="flex items-start space-x-3">
-                    <BookOpen size={20} className="text-orange-400 mt-1" />
-                    <div>
-                      <p className="text-sm text-gray-400">Focus Areas</p>
-                      <div className="flex flex-wrap gap-2 mt-2">
-                        <span className="skill-tag px-3 py-1 rounded-full text-sm">Artificial Intelligence</span>
-                        <span className="skill-tag px-3 py-1 rounded-full text-sm">Machine Learning</span>
-                        <span className="skill-tag px-3 py-1 rounded-full text-sm">Software Engineering</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-8 pt-8 border-t border-white/10">
-                <p className="text-gray-300 leading-relaxed text-lg">
-                  Currently pursuing a comprehensive Computer Science education with a strong focus on AI and machine learning technologies. 
-                  My academic journey is complemented by hands-on project development and real-world application of cutting-edge technologies.
+              <div>
+                <h3 className="text-xl font-bold text-white">
+                  California State University
+                </h3>
+                <p className="text-zinc-400 mb-1">
+                  B.S. Computer Science
                 </p>
+                <p className="text-sm text-zinc-500 mb-5">
+                  Junior · Expected graduation May 2027
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {['Artificial Intelligence', 'Machine Learning', 'Software Engineering'].map(
+                    (focus) => (
+                      <span
+                        key={focus}
+                        className="text-xs font-medium text-zinc-300 bg-white/5 border border-white/10 rounded-full px-3 py-1"
+                      >
+                        {focus}
+                      </span>
+                    )
+                  )}
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );
